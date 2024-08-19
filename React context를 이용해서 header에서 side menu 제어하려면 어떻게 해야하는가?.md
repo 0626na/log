@@ -4,4 +4,5 @@
 첫번째는 header와 sidebar를 하나의 파일에 import 하고, 이 파일을 layout에 import 한다. 그리고 header와 sidebar가 import된 파일을 client component로 만들어서 state를 내려주면 된다.
 
 두번째는 header 컴포넌트에서의 햄버거 버튼을 클릭 상태를 글로벌로 관리하면 된다.
-이건 세번째 테스트 네번째
+
+이중에 두번째 방법으로 시도를 하고자 한다.
