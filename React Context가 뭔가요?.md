@@ -14,7 +14,7 @@ Context는 데이터를 상위에서 하위로 징검다리 처럼 건네주는 
 - [리액트 공식문서 Context Part](https://react.dev/learn/passing-data-deeply-with-context)
 
 ### 실제 Context 사용하는 방법은?
-[[React Context 사용법]]
+[React Context 사용법](React%20Context%20사용법.md)
 
 #react #react-context 
 
