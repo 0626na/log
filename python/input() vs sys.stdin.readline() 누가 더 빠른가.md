@@ -119,3 +119,9 @@ builtin_input_impl(PyObject *module, PyObject *prompt)
 이러한 다양한 작업들이 이루어진다. c언어로 되어있고 내부 소스코드는 매우 복잡하기에 읽고 이해하는 것이 매우 어려웠다.
 하지만 그저 sys.stdin.readline 함수가 빠르다. 이렇게 끝이 아닌 소스코드까지 파고 들어가 이러한 이유로 input 함수가 늦는다는 것을 알게되었다.
 마지막으로 이곳에서 작성한 내용은 내가 개인적으로 조사하면서 알게되고 이해한 내용을 적은 것이기에 틀린 내용이 있을수도 있음을 밝힙니다.
+
+## reference
+
+- [파이썬 input](https://docs.python.org/3/library/functions.html#input)
+- [sys.stdin](https://docs.python.org/3/library/sys.html#sys.stdin)
+- [파이썬 소스코드 input 함수 부분](https://github.com/python/cpython/blob/main/Python/bltinmodule.c)
