@@ -8,13 +8,11 @@ chizzy 프로젝트를 진행하던 도중, 라이브 화면 부분의 높이를
 
 아래는 이슈가 생긴 파일의 코드의 이슈가 발생한 부분이다.
 
-```html
-<section
-  className="grid grid-cols-[3fr_1fr] gap-4 h-[calc(100vh-120px)] bg-[#121212] "
->
+```jsx
+<section className="grid grid-cols-[3fr_1fr] gap-4 h-[calc(100vh-120px)] bg-[#121212] ">
   <div className="relative bg-gray-500 h-full box-border">
     <h3>안녕</h3>
-    <!-- h-full이 설정되어 있기에 다른 요소를 신경쓰지 않고 자신의 높이를 부모요소의 높이 전체를 사용한다.-->
+    {/* h-full이 설정되어 있기에 다른 요소를 신경쓰지 않고 자신의 높이를 부모요소의 높이 전체를 사용한다. */}
     <div className="bg-black h-full">
       <iframe
         src="https://youtu.be/rjddthcbSxA?si=yPCYd7NAeEp4DbHc"
@@ -52,15 +50,13 @@ h-full을 사용할때 요소가 단 하나만 존재하면 문제가 되지 않
 
 flexbox를 쓰면 높이에 상관없이 요소들이 자연스럽게 각 요소들이 높이를 조정합니다.
 
-```html
-<section
-  className="grid grid-cols-[3fr_1fr] gap-4 h-[calc(100vh-120px)] bg-[#121212]"
->
-  <!--h3와 iframe의 부모 요소인 div에 flex와 flex-col을 적용하여 세로방향 flexbox로 설정한다 -->
+```jsx
+<section className="grid grid-cols-[3fr_1fr] gap-4 h-[calc(100vh-120px)] bg-[#121212]">
+  {/* h3와 iframe의 부모 요소인 div에 flex와 flex-col을 적용하여 세로방향 flexbox로 설정한다 */}
   <div className="relative bg-gray-500 h-full box-border flex flex-col">
     <h3>안녕</h3>
 
-    <!--flex-grow 설정을 하여 h3다음에 남은 공간을 차지한다. 아런식으로 하면 영역을 침범하지 않으면서 높이를 유연하게 요소마다 적용하는게 가능하다.-->
+    {/* flex-grow 설정을 하여 h3다음에 남은 공간을 차지한다. 아런식으로 하면 영역을 침범하지 않으면서 높이를 유연하게 요소마다 적용하는게 가능하다. */}
     <div className="bg-black flex-grow">
       <iframe
         src="https://youtu.be/rjddthcbSxA?si=yPCYd7NAeEp4DbHc"
@@ -107,6 +103,30 @@ Grid 레이아웃을 사용하면 행의 높이를 명확히 설정하여 자식
 
 <img height=500 src='./img/chizzy/chizzy 라이브 스트리밍 UI 높이 벗어나는 이슈 해결.png'>
 
+### CSS calc() 함수 활용
+
+calc() 함수를 사용하여 동적으로 높이를 계산할 수 있다. 예를 들어, h-full 대신 height: calc(100% - [고정 높이]);를 사용하여 특정 요소의 높이를 제외한 나머지 공간을 채우도록 설정할 수 있다. 그리고 h3 태그에 calc에서 빼준 50px만큼 높이값으로 설정합니다.
+
+```jsx
+<div className="relative bg-gray-500 box-border h-[calc(100%-50px)]">
+  <h3 className="h-[50px]">안녕</h3>
+  <div className="bg-black h-full">
+    <iframe
+      src="https://www.youtube.com/embed/rjddthcbSxA?si=yPCYd7"
+      allowfullscreen
+      className="w-full h-full"
+    ></iframe>
+  </div>
+</div>
+```
+
+## Tailwind CSS의 임의의 값 (arbitrary value)
+
+Tailwind CSS는 기본적으로 다양한 유틸리티 클래스를 제공하지만, 제공하는 것 이외에 요구 사항에 맞춰 커스터마이징이 필요할 때는 **임의의 값(arbitrary value)**을 사용한다. 이때는 대괄호 [ ]를 사용하여 원하는 값을 직접 지정할 수 있다.
+예를 들어, 위에서 grid를 사용한 해결방법에서 사용한 grid-rows-[auto_1fr]는 grid-template-rows: auto 1fr;을 적용하는 방법이다.
+임의의 값을 사용할 때는 Tailwind의 JIT(Just-In-Time) 모드가 활성화되어 있어야 한다.
+
 ## 결론
 
-프로젝트 초기 단계에서 발생한 비교적 단순한 레이아웃 이슈였지만, 이를 통해 CSS 레이아웃의 중요성과 Flexbox 및 Grid의 유연성을 깨닫게 되었습니다. 단순히 문제를 해결하고 넘어가는 것이 아니라, 근본 원인을 이해하고 다양한 해결 방안을 적용해보는 것이 중요함을 다시 한 번 확인할 수 있었습니다. 앞으로도 다양한 레이아웃 문제에 직면했을 때, Flexbox와 Grid를 적절히 활용하여 효율적이고 안정적인 UI를 구현할 수 있을 것입니다. 단순 CSS에서 height:100%를 쓰면 어떻게 작동되는지 확실하게 알게 되었습니다.
+프로젝트 초기 단계에서 발생한 비교적 단순한 레이아웃 이슈였지만, 이를 통해 CSS 레이아웃의 중요성과 Flexbox 및 Grid의 유연성에 대해 더 깊이 이해하게 되었습니다. 단순히 문제를 해결하고 넘어가는 것이 아니라, 근본 원인을 이해하고 다양한 해결 방안을 적용해보는 것이 중요함을 다시 한 번 확인할 수 있었습니다. 앞으로도 다양한 레이아웃 문제에 직면했을 때, Flexbox와 Grid를 적절히 활용하여 효율적이고 안정적인 UI를 구현할 수 있을 것입니다.
+단순 CSS에서 height:100%를 쓰면 어떻게 작동되는지 확실하게 알게 되었습니다.
